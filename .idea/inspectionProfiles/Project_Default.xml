@@ -1,0 +1,68 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="1">
+            <item index="0" class="java.lang.String" itemvalue="aiohttp" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E122" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyShadowingBuiltinsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredNames">
+        <list>
+          <option value="list" />
+          <option value="id" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="main.sum_of_degree" />
+          <option value="main.sum_of_degrees" />
+          <option value="main.sam_of_degree" />
+          <option value="пробник.vse_Gls" />
+          <option value="пробник.vse_gl" />
+          <option value="пробник.vse_gls" />
+          <option value="пробник.vse_sgl" />
+          <option value="handlers.fsm_anketa" />
+          <option value="keyboards.client_kb.submit_markup" />
+          <option value="main.core" />
+          <option value="aiogram.bot.bot.Bot.from_user" />
+          <option value="handlers.schedule.wake_up" />
+          <option value="datetime.datetime.datatime" />
+          <option value="datetime.datatime" />
+          <option value="config.ADMINS" />
+          <option value="config.bot.kick_chat_member" />
+          <option value="config.bot.send_game" />
+          <option value="config.bot.send_poll" />
+          <option value="config.bot.pin_chat_message" />
+          <option value="config.bot.send_photo" />
+          <option value="config.dp.message_handler" />
+          <option value="config.dp.callback_query_handler" />
+          <option value="config.bot" />
+          <option value="handlers.client_kb.direction_markup" />
+          <option value="students.views.*" />
+          <option value="django.conf.urls.url" />
+          <option value="django.conf.urls.include" />
+          <option value="students.models.Student" />
+          <option value="schedule.views.schedule" />
+          <option value="django.db.models.ManyToMany" />
+          <option value="Blog.settings.os" />
+          <option value="product.models.Product.reviews" />
+          <option value="aiogram.utils.executor.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
