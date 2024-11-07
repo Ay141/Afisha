@@ -8,7 +8,8 @@ from rest_framework import status
 @api_view(['GET'])
 def film_list_api_view(request):
     # Step 1: collect data
-    films = Film.objects.all()
+    films = Film.objects.select_related('director')\
+        .prefetch_related('genres', 'reviews').all()
     # Step 2: convert data to dict
     films_json = FilmSerializers(films, many=True).data
     # Step 3: return dict as json
