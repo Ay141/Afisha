@@ -20,6 +20,7 @@ from films import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/films/', views.film_list_api_view),
-    path('api/v1/films/<int:film_id>/', views.film_detail_api_view),
+    path('api/v1/films/', views.film_list_api_view), # GET -> list(когда приходят GET отдаем список данных), Post -> create
+    path('api/v1/films/<int:film_id>/',
+         views.film_detail_api_view), # GET -> item (получение), PUT:PATCH -> update(для обновления), DELETE -> destroy(удаления)
 ]
