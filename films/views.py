@@ -7,6 +7,7 @@ from rest_framework import status
 
 @api_view(['GET', 'POST'])
 def film_list_api_view(request):
+    print(request.user)
     if request.method == 'GET':
         # Step 1: collect data
         films = Film.objects.select_related('director')\
