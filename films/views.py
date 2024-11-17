@@ -1,8 +1,53 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from films.models import Film
-from films.serializers import FilmSerializers, FilmCreateValidateSerializers
+from films.models import Film, Director, Genre
+from films.serializers import FilmSerializers, FilmCreateValidateSerializers, \
+    DirectorSerializers, GenreSerializers
 from rest_framework import status
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.viewsets import ModelViewSet
+
+
+class FilmListCreateAPIView(ListCreateAPIView):
+    serializer_class = FilmSerializers
+    queryset = Film.objects.all()
+    pagination_class = PageNumberPagination
+
+# класс basequery
+    def post(self, request, *args, **kwargs):
+        serializer = FilmCreateValidateSerializers(data=request.data)
+        if not serializer.is_valid():
+            return Response(status=status.HTTP_400_BAD_REQUEST,
+                            data={'message': 'Request failed', 'errors': serializer.errors})
+
+        genres = serializer.validated_data.get('genres')
+
+        film = Film.objects.create(**serializer.create_validated_data())
+        film.genres.set(genres)
+        film.save()
+
+        return Response(status=status.HTTP_201_CREATED,
+                        data={'id': film.id, 'title': film.title})
+
+
+class GenreAPIViewSet(ModelViewSet):
+    serializer_class = GenreSerializers
+    queryset = Genre.objects.all()
+    pagination_class = PageNumberPagination
+    lookup_field = 'id'
+
+
+class DirectorListCreateAPIView(ListCreateAPIView):
+    serializer_class = DirectorSerializers
+    queryset = Director.objects.all()
+    pagination_class = PageNumberPagination
+
+
+class DirectorDetailAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = DirectorSerializers
+    queryset = Director.objects.all()
+    lookup_field = 'id'
 
 
 @api_view(['GET', 'POST'])
@@ -20,24 +65,7 @@ def film_list_api_view(request):
         return Response(data=films_json)
 
     # Получение данных от клиента
-    elif request.method == 'POST':
-        # Step 0: Validation
-        serializer = FilmCreateValidateSerializers(data=request.data)
-        if not serializer.is_valid():
-            return Response(status=status.HTTP_400_BAD_REQUEST,
-                            data={'message': 'Request failed', 'errors': serializer.errors})
-
-        # Step 1: Get data from validated data
-        genres = serializer.validated_data.get('genres')
-
-        # Step 2: Create Film with data
-        film = Film.objects.create(**serializer.create_validated_data())
-        film.genres.set(genres)
-        film.save()
-
-        # Step 3: Return response (status) as created objects
-        return Response(status=status.HTTP_201_CREATED,
-                        data={'id': film.id, 'title': film.title})
+    # elif request.method == 'POST':
 
 
 # Для получения одного объекта

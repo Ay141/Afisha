@@ -12,8 +12,13 @@ def signup_api_view(request):
     serializer = SignupValidateSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     user = User.objects.create_user(**serializer.validated_data)
+    # Create 6 symbol code
+    # Create object by ConfirmCode model
     return Response(data={'message': 'User created', 'user_id': user.id})
 
+
+def confirm_api_view(request):
+    """Get CODE(6) and activate user"""
 
 @api_view(['POST'])
 def login_api_view(request):

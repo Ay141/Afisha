@@ -3,6 +3,12 @@ from films.models import Film, Director, Review, Genre
 from rest_framework.exceptions import ValidationError
 
 
+class GenreSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = '__all__'
+
+
 class DirectorSerializers(serializers.ModelSerializer):
     class Meta:
         model = Director
@@ -10,20 +16,13 @@ class DirectorSerializers(serializers.ModelSerializer):
         fields = 'id name year age'.split()
 
 
-class ReviewSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Review
-        fields = 'text stars'.split()
-
-
 class FilmSerializers(serializers.ModelSerializer):
     director = DirectorSerializers()
     genres = serializers.SerializerMethodField()
-    all_reviews = ReviewSerializers(many=True) # Вывод звезды
 
     class Meta:
         model = Film
-        fields = 'id title genres director rating_kinopoisk all_reviews reviews '.split()
+        fields = 'id title genres director'.split()
 
     def get_genres(self, film):
         return[
